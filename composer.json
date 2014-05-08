@@ -1,0 +1,14 @@
+{
+    "name": "iakio/htmlhelper",
+    "authors": [
+        {
+            "name": "ISHIDA Akio",
+            "email": "iakio.monospacenet@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "iakio\\htmlhelper\\": "src/"
+        }
+    }
+}
