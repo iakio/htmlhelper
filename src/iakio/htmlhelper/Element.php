@@ -61,15 +61,19 @@ class Element
                 $html .= '="' . $this->escape($val) . '"';
             }
         }
-        $html .= '>';
+        $innerhtml = '';
         foreach ($this->children as $child) {
             if (is_scalar($child)) {
-                $html .= $this->escape($child);
+                $innerhtml .= $this->escape($child);
             } elseif ($child instanceof Element) {
-                $html .= $child->toString();
+                $innerhtml .= $child->toString();
             }
         }
-        $html .= '</' . $this->tagname . '>';
+        if ($innerhtml) {
+            $html .= '>' . $innerhtml . '</' . $this->tagname . '>';
+        } else {
+            $html .= ' />';
+        }
         return $html;
     }
 

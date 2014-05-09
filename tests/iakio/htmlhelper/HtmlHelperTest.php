@@ -31,8 +31,12 @@ class HtmlHelperTest extends \PHPUnit_Framework_TestCase
     {
         $h = new HtmlHelper();
         $this->assertEquals(
-            '<option checked></option>',
+            '<option checked />',
             $h->option("", "checked")->toString()
+        );
+        $this->assertEquals(
+            '<input type="checkbox" checked />',
+            $h->input("", array('type' => 'checkbox', 'checked' => null))->toString()
         );
     }
 
