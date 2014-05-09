@@ -34,10 +34,10 @@ class HtmlHelperTest extends \PHPUnit_Framework_TestCase
             HtmlHelper::a()
                 ->attr(array('href' => 'https://github.com/'))
                 ->append(
-                    [
+                    array(
                         'git',
                         HtmlHelper::b('hub')
-                    ]);
+                    ));
     }
 
     public function test_attribute_without_value()
