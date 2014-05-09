@@ -1,6 +1,6 @@
 {
     "name": "iakio/htmlhelper",
-    "description": "simple html helpre",
+    "description": "Simple secure HtmlHelper",
     "type": "library",
     "keywords": [ "html" ],
     "homepage": "https://github.com/iakio/htmlhelper",

@@ -9,7 +9,10 @@ class HtmlHelperTest extends \PHPUnit_Framework_TestCase
         $h = new HtmlHelper();
         $this->assertEquals(
             '<a href="https://github.com/">github</a>',
-            $h->tag('a', ['href' => 'https://github.com/'], 'github')
+            $h->tag('a')
+                ->attr('href', 'https://github.com/')
+                ->append('github')
+                ->toString()
         );
     }
 
@@ -18,31 +21,40 @@ class HtmlHelperTest extends \PHPUnit_Framework_TestCase
         $h = new HtmlHelper();
         $this->assertEquals(
             '<a href="https://github.com/">git &amp; hub</a>',
-            $h->a(['href' => 'https://github.com/'], 'git & hub')
+            $h->a('git & hub')
+                ->attr('href', 'https://github.com/')
+                ->toString()
         );
     }
 
     public function test_call_static()
     {
-        $this->assertEquals(
-            '<a href="https://github.com/">git<b>hub</b></a>',
-            HtmlHelper::a(['href' => 'https://github.com/'], [
-                'git',
-                HtmlHelper::b([], 'hub')
-            ])
-        );
+        $this->expectOutputString('<a href="https://github.com/">git<b>hub</b></a>');
+        echo 
+            HtmlHelper::a()
+                ->attr(array('href' => 'https://github.com/'))
+                ->append(
+                    [
+                        'git',
+                        HtmlHelper::b('hub')
+                    ]);
     }
 
-    public function test_map()
+    public function test_attribute_without_value()
     {
         $h = new HtmlHelper();
         $this->assertEquals(
-            '<li class="item-1">One</li>'
-            . '<li class="item-2">Two</li>'
-            . '<li class="item-3">Three</li>',
-            $h->map(['One', 'Two', 'Three'], function ($key , $val) use ($h) {
-                return $h->li(['class' => 'item-' . ($key + 1)], $val);
-            })
+            '<option checked></option>',
+            $h->option("", "checked")->toString()
         );
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function test_invalid_argument_exception()
+    {
+        $h = new HtmlHelper();
+        $h->a()->attr(array(), "a");
     }
 }
