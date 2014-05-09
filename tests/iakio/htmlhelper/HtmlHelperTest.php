@@ -27,19 +27,6 @@ class HtmlHelperTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function test_call_static()
-    {
-        $this->expectOutputString('<a href="https://github.com/">git<b>hub</b></a>');
-        echo 
-            HtmlHelper::a()
-                ->attr(array('href' => 'https://github.com/'))
-                ->append(
-                    array(
-                        'git',
-                        HtmlHelper::b('hub')
-                    ));
-    }
-
     public function test_attribute_without_value()
     {
         $h = new HtmlHelper();
