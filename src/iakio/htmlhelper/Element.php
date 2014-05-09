@@ -7,6 +7,11 @@ class Element
     protected $children = array();
     protected $attributes = array();
 
+    /**
+     * @param string $tagname
+     * @param array|string|Element $children
+     * @param array|string $attributes
+     */
     public function __construct($tagname, $children = array(), $attributes = array())
     {
         $this->tagname = $tagname;
@@ -15,6 +20,13 @@ class Element
     }
 
 
+    /**
+     * Set attributes
+     *
+     * @param array|string $name_or_attrs
+     * @param string|null $value
+     * @return self
+     */
     public function attr($name_or_attrs, $value = null)
     {
         if (is_array($name_or_attrs)) {
@@ -36,6 +48,13 @@ class Element
         return $this;
     }
 
+
+    /**
+     * Append children
+     *
+     * @param array|string|Element $children
+     * @return self
+     */
     public function append($children)
     {
         if (!is_array($children)) {
@@ -47,11 +66,20 @@ class Element
         return $this;
     }
 
+
+    /**
+     * @param string $str
+     * @return string
+     */
     public function escape($str)
     {
         return htmlspecialchars($str, ENT_QUOTES, 'UTF-8');
     }
 
+
+    /**
+     * @return string
+     */
     public function toString()
     {
         $html = '<' . $this->escape($this->tagname);
@@ -77,6 +105,10 @@ class Element
         return $html;
     }
 
+
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return $this->toString();
