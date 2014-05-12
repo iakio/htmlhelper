@@ -1,6 +1,14 @@
 HtmlHelper
 =======================
+[![Build Status](https://travis-ci.org/iakio/htmlhelper.svg?branch=master)](https://travis-ci.org/iakio/htmlhelper)
+
 Simple secure HtmlHelper.
+
+Features:
+-----------------------
+
+* Auto escaping.
+* Fluent interface.
 
 Usage:
 -----------------------

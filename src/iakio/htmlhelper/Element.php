@@ -8,9 +8,9 @@ class Element
     protected $attributes = array();
 
     /**
-     * @param string $tagname
+     * @param string               $tagname
      * @param array|string|Element $children
-     * @param array|string $attributes
+     * @param array|string         $attributes
      */
     public function __construct($tagname, $children = array(), $attributes = array())
     {
@@ -19,12 +19,16 @@ class Element
         $this->attr($attributes);
     }
 
-
     /**
      * Set attributes
      *
-     * @param array|string $name_or_attrs
-     * @param string|null $value
+     * $name_or_attrs is array of name and value pair of attributes, or
+     * string of attribute name.
+     * $value is attribute value if $name_or_attrs is string, or null
+     * if attribute has no value. (e.g. `<option checked>`)
+     *
+     * @param  array|string $name_or_attrs
+     * @param  string|null  $value
      * @return self
      */
     public function attr($name_or_attrs, $value = null)
@@ -45,14 +49,16 @@ class Element
             }
             $this->attributes[$name] = $value;
         }
+
         return $this;
     }
-
 
     /**
      * Append children
      *
-     * @param array|string|Element $children
+     * $children is string or Element object or array of those.
+     *
+     * @param  array|string|Element $children
      * @return self
      */
     public function append($children)
@@ -63,12 +69,14 @@ class Element
         foreach ($children as $child) {
             $this->children[] = $child;
         }
+
         return $this;
     }
 
-
     /**
-     * @param string $str
+     * Escape HTML special charractars.
+     *
+     * @param  string $str
      * @return string
      */
     public function escape($str)
@@ -76,8 +84,9 @@ class Element
         return htmlspecialchars($str, ENT_QUOTES, 'UTF-8');
     }
 
-
     /**
+     * Convert Element to HTML string.
+     *
      * @return string
      */
     public function toString()
@@ -102,11 +111,13 @@ class Element
         } else {
             $html .= ' />';
         }
+
         return $html;
     }
 
-
     /**
+     * Magic method.
+     *
      * @return string
      */
     public function __toString()

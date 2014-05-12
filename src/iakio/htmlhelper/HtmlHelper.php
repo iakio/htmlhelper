@@ -10,9 +10,9 @@ class HtmlHelper
      * $attributes is array of name and value pair of attributes. or
      * string of attribute name. (e.g. `<option checked>`)
      *
-     * @param string $tagname
+     * @param string               $tagname
      * @param array|string|Element $children
-     * @param array|string $attributes
+     * @param array|string         $attributes
      *
      * @return Element
      */
@@ -21,11 +21,10 @@ class HtmlHelper
         return new Element($tagname, $children, $attributes);
     }
 
-
     /**
      * Magic method. Shortcut of tag()
      *
-     * @param string $name
+     * @param string       $name
      * @param array|string $arguments
      *
      * @return Element
@@ -33,6 +32,7 @@ class HtmlHelper
     public function __call($name, $arguments)
     {
         array_unshift($arguments, $name);
+
         return call_user_func_array(array($this, 'tag'), $arguments);
     }
 }
