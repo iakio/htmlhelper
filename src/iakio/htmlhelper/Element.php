@@ -86,6 +86,12 @@ class Element
      */
     public function append($children)
     {
+        if (empty($children)) {
+            return;
+        }
+        if ($this->is_void) {
+            throw new \LogicException($this->tagname . " can't have any content");
+        }
         if (!is_array($children)) {
             $children = array($children);
         }

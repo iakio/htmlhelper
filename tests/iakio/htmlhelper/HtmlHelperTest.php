@@ -61,4 +61,13 @@ class HtmlHelperTest extends \PHPUnit_Framework_TestCase
         $h = new HtmlHelper();
         $h->a()->attr(array(), "a");
     }
+
+    /**
+     * @expectedException \LogicException
+     */
+    public function test_exception_when_add_content_to_void_element()
+    {
+        $h = new HtmlHelper();
+        $h->input("text");
+    }
 }
