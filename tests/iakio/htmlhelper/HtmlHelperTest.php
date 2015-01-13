@@ -48,6 +48,10 @@ class HtmlHelperTest extends \PHPUnit_Framework_TestCase
             $h->area()->toString()
         );
         $this->assertEquals(
+            '<br />',
+            $h->BR()->toString()
+        );
+        $this->assertEquals(
             '<script></script>',
             $h->script()->toString()
         );

@@ -36,8 +36,8 @@ class Element
      */
     public function __construct($tagname, $children = array(), $attributes = array())
     {
-        $this->tagname = $tagname;
-        $this->is_void = in_array($tagname, static::$void_elements);
+        $this->tagname = strtolower($tagname);
+        $this->is_void = in_array($this->tagname, static::$void_elements);
         $this->append($children);
         $this->attr($attributes);
     }
