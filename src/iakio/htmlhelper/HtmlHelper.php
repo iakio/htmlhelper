@@ -16,7 +16,7 @@ class HtmlHelper
      *
      * @return Element
      */
-    public function tag($tagname, $children = array(), $attributes = array())
+    public static function tag($tagname, $children = array(), $attributes = array())
     {
         return new Element($tagname, $children, $attributes);
     }
@@ -34,5 +34,13 @@ class HtmlHelper
         array_unshift($arguments, $name);
 
         return call_user_func_array(array($this, 'tag'), $arguments);
+    }
+
+
+    public static function __callStatic($name, $arguments)
+    {
+        array_unshift($arguments, $name);
+
+        return call_user_func_array('static::tag', $arguments);
     }
 }

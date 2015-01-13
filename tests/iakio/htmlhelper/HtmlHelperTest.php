@@ -57,6 +57,16 @@ class HtmlHelperTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    public function test_call_static()
+    {
+        $this->assertEquals(
+            '<a href="https://github.com/">git &amp; hub</a>',
+            HtmlHelper::a('git & hub')
+                ->attr('href', 'https://github.com/')
+                ->toString()
+        );
+    }
+
     /**
      * @expectedException \InvalidArgumentException
      */
