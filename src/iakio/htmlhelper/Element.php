@@ -3,9 +3,31 @@ namespace iakio\htmlhelper;
 
 class Element
 {
+    /**
+     * http://www.w3.org/TR/html5/syntax.html#void-elements
+     */
+    static $void_elements = array(
+            'area',
+            'base',
+            'br',
+            'col',
+            'embed',
+            'hr',
+            'img',
+            'input',
+            'keygen',
+            'link',
+            'meta',
+            'param',
+            'source',
+            'track',
+            'wbr'
+    );
+
     protected $tagname;
     protected $children = array();
     protected $attributes = array();
+    protected $is_void = false;
 
     /**
      * @param string               $tagname
@@ -15,6 +37,7 @@ class Element
     public function __construct($tagname, $children = array(), $attributes = array())
     {
         $this->tagname = $tagname;
+        $this->is_void = in_array($tagname, static::$void_elements);
         $this->append($children);
         $this->attr($attributes);
     }
@@ -74,7 +97,7 @@ class Element
     }
 
     /**
-     * Escape HTML special charractars.
+     * Escape HTML special characters.
      *
      * @param  string $str
      * @return string
@@ -106,10 +129,10 @@ class Element
                 $innerhtml .= $child->toString();
             }
         }
-        if ($innerhtml) {
-            $html .= '>' . $innerhtml . '</' . $this->tagname . '>';
-        } else {
+        if ($this->is_void) {
             $html .= ' />';
+        } else {
+            $html .= '>' . $innerhtml . '</' . $this->tagname . '>';
         }
 
         return $html;
